@@ -1,0 +1,236 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Library Management Information System",
+        "description": "RCA library management information system",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8000/api/v1",
+            "description": "Local development server"
+        }
+    ],
+    "tags": [
+        {
+            "name": "Auth",
+            "description": "Endpoints relate to authentication"
+        },
+        {
+            "name": "Users",
+            "description": "Endpoints related to managing users"
+        },
+        {
+            "name": "Books",
+            "description": "Endpoints related to managing books"
+        }
+    ],
+    "paths": {
+        "/auth/login": {
+            "post": {
+                "summary": "Authenticate a user",
+                "tags": [
+                    "Auth"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/LoginSchema"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User Logged in successfully"
+                    }
+                }
+            }
+        },
+        "/users/getAll": {
+            "get": {
+                "summary": "Get all users",
+                "tags": [
+                    "Users"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/User"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": [
+                            "global"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/users/createAccount": {
+            "post": {
+                "summary": "Create a new user",
+                "tags": [
+                    "Users"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/User"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User created successfully"
+                    }
+                }
+            }
+        },
+        "/books/getAll": {
+            "get": {
+                "summary": "Get all books",
+                "tags": [
+                    "Books"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Book"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": [
+                            "global"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/books/create": {
+            "post": {
+                "summary": "Create a new book",
+                "tags": [
+                    "Books"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Book"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Book created successfully"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": [
+                            "global"
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "User": {
+                "type": "object",
+                "properties": {
+                    "firstName": {
+                        "type": "string",
+                        "example": "John"
+                    },
+                    "lastName": {
+                        "type": "string",
+                        "example": "Doe"
+                    },
+                    "email": {
+                        "type": "string",
+                        "example": "JohnDoe@gmail.com"
+                    },
+                    "password": {
+                        "type": "string",
+                        "example": "JohnDoe@123"
+                    }
+                }
+            },
+            "LoginSchema": {
+                "type": "object",
+                "properties": {
+                    "email": {
+                        "type": "string",
+                        "example": "JohnDoe@gmail.com"
+                    },
+                    "password": {
+                        "type": "string",
+                        "example": ".."
+                    }
+                }
+            },
+            "Book": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "The Great Gatsby"
+                    },
+                    "author": {
+                        "type": "string",
+                        "example": "F. Scott Fitzgerald"
+                    },
+                    "publisher": {
+                        "type": "string",
+                        "example": "Bakame edition"
+                    },
+                    "publicationYear": {
+                        "type": "string",
+                        "example": "2023"
+                    },
+                    "subject": {
+                        "type": "string",
+                        "example": "Java"
+                    }
+                }
+            }
+        },
+        "securitySchemes": {
+            "Bearer": {
+                "type": "apiKey",
+                "name": "Authorization",
+                "in": "header"
+            }
+        }
+    }
+}

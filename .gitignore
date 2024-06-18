@@ -1,0 +1,27 @@
+backend-service/node_modules
+backend-service/dist
+
+
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+frontend-service/node_modules
+frontend-service/.pnp
+frontend-service/.pnp.js
+
+# testing
+frontend-service/coverage
+
+# production
+frontend-service/build
+
+# misc
+frontend-service/.DS_Store
+frontend-service/.env.local
+frontend-service/.env.development.local
+frontend-service/.env.test.local
+frontend-service/.env.production.local
+
+frontend-service/npm-debug.log*
+frontend-service/yarn-debug.log*
+frontend-service/yarn-error.log*
